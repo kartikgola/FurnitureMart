@@ -59,14 +59,21 @@
                         <img src="{{profilePic}}" alt="" class="img-rounded img-responsive" />
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h4>
-                            {{user.name}}</h4>
-                        <small><cite title="{{location}}">{{location}}<i class="glyphicon glyphicon-map-marker">
-                        </i></cite></small>
+                        <h4>{{user.name}}</h4>
+                        {% if location %}
+                            <small><cite title="{{location}}">{{location}}<i class="glyphicon glyphicon-map-marker">
+                            </i></cite></small>
+                        {% endif %}
+
                         <p>
-                            <i class="glyphicon glyphicon-envelope"></i>{{emails}}
+                            {% if emails %}
+                                <i class="glyphicon glyphicon-envelope"></i>{{emails}}
+                            {% endif %}
                             <br />
-                            <i class="glyphicon glyphicon-gift"></i>{{dob}}</p>
+                            {% if dob %}
+                                <i class="glyphicon glyphicon-gift"></i>{{dob}}
+                            {% endif %}
+                        </p>
                     </div>
                 </div>
             </div>

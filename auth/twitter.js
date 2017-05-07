@@ -8,6 +8,7 @@ var init = require('./init');
 passport.use(new TwitterStrategy({
     consumerKey: config.twitterAuth.consumerKey,
     consumerSecret: config.twitterAuth.consumerSecret,
+    userProfileURL: "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true",
     callbackURL: config.twitterAuth.callbackURL,
   },
   function(accessToken, refreshToken, profile, done) {
@@ -20,7 +21,7 @@ passport.use(new TwitterStrategy({
       name: profile.displayName,
       someID: profile.id,
       profilePic : profile.photos[0].value,
-      emails : profile.email
+      emails : profile.emails[0].value
     };
 
     var options = {

@@ -121,9 +121,9 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
     });
 
     // Twitter auth
-    router.get('/auth/twitter', passportTwitter.authenticate('twitter', { scope : 'email' }));
+    router.get('/auth/twitter', passportTwitter.authenticate('twitter', { scope : ['email'] }));
     router.get('/auth/twitter/callback', passportTwitter.authenticate('twitter', {
-        failureRedirect: '/login',  scope : 'email'
+        failureRedirect: '/login',  scope : ['email']
     }), function(req, res) {
           USERID = req.user.someID;
           res.redirect('/');
@@ -163,9 +163,9 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
                 res.render('myprofile', {
                   user : req.user,
                   profilePic : doc.profilePic.replace("_normal", ""),
-                  emails : doc.emails || "me@kartikgola.com",
-                  dob : doc.dob || "08/09/1995",
-                  location : doc.location || 'New Delhi, India',
+                  emails : doc.emails,
+                  dob : doc.dob,
+                  location : doc.location,
                   orders : userOrders
                 });
               });
