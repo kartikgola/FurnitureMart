@@ -14,14 +14,15 @@ passport.use(new TwitterStrategy({
   function(accessToken, refreshToken, profile, done) {
 
     var searchQuery = {
-      name: profile.displayName
+      someID: profile.id
     };
 
     var updates = {
       name: profile.displayName,
       someID: profile.id,
       profilePic : profile.photos[0].value,
-      emails : profile.emails[0].value
+      emails : profile.emails[0].value,
+      location : profile.location
     };
 
     var options = {

@@ -131,9 +131,9 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
     );
 
     // Linkedin auth
-    router.get('/auth/linkedin', passportLinkedIn.authenticate('linkedin', { scope : 'email' }));
+    router.get('/auth/linkedin', passportLinkedIn.authenticate('linkedin'));
     router.get('/auth/linkedin/callback', passportLinkedIn.authenticate('linkedin', {
-      failureRedirect: '/login', scope : 'email'
+      failureRedirect: '/login', scope: ['r_basicprofile', 'r_emailaddress']
     }), function(req, res) {
           USERID = req.user.someID;
           res.redirect('/');
@@ -160,9 +160,12 @@ MongoClient.connect('mongodb://localhost:27017/mongomart', function(err, db) {
               dbb.close();
 
               order.getUserOrders(req.user.someID, function(userOrders){
+                if ( doc.profilePic ){
+                  doc.profilePic = doc.profilePic.replace("_normal", "")
+                }
                 res.render('myprofile', {
                   user : req.user,
-                  profilePic : doc.profilePic.replace("_normal", ""),
+                  profilePic : doc.profilePic || "http://www.racialjusticenetwork.co.uk/wp-content/uploads/2016/12/default-profile-picture.png",
                   emails : doc.emails,
                   dob : doc.dob,
                   location : doc.location,
