@@ -1,5 +1,5 @@
 # MongoMart
-Furniture Mart - M101JS final project
+Mongo Mart - M101JS final project
 
 This is final week project of "mongoDB for Node.js developers" (M101JS) by mongoDB University.
 It includes-
